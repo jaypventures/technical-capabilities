@@ -2,178 +2,88 @@
 
 ![Jay Price — Make complexity answer to evidence](assets/hero.svg)
 
-<br/>
-
 ### JAY PRICE
 **Systems Architect · Software Engineer · Technical Consultant**
 
-*I connect operational reality with technical execution—then make the decisions inspectable.*
+*I turn complicated requirements into software that can be examined, tested, and trusted.*
 
-[**START WITH THE ENGINEERING REVIEW →**](docs/ENGINEERING-REVIEW.md) &nbsp;&nbsp; [**TRACE THE EVIDENCE →**](evidence/INDEX.md) &nbsp;&nbsp; [**FIVE-MINUTE REVIEW →**](docs/REVIEWER-GUIDE.md)
-
-<br/>
-
-`SYSTEMS ARCHITECTURE` &nbsp; `SOFTWARE ENGINEERING` &nbsp; `SECURE INTEGRATIONS` &nbsp; `AUTOMATION` &nbsp; `RELEASE INTEGRITY`
+[**READ THE REAL ENGINEERING CASES →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) &nbsp;·&nbsp; [**REVIEW THE EVIDENCE →**](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md)
 
 </div>
 
 ---
 
-<table>
-<tr><td width="56%" valign="top">
+## The work behind the title
 
-### THE POINT OF VIEW
+I care about the questions that appear after someone says, “It works.”
 
-## I don't just ask whether a system works.<br/>I ask what makes it trustworthy.
+Does a passing build mean the right revision is live? What happens when a downstream service never confirms delivery? Can a visual approval still be trusted after the source changes? Who decides when a release has enough evidence to proceed?
 
-My work sits at the intersection of **architecture, implementation, and operational integrity**. I translate complicated requirements into explicit system boundaries, testable decisions, and software that can be examined beyond the happy path.
+Those questions have shaped engineering work I've reviewed and developed. The four cases below describe specific implementation decisions from existing source, with identifying details removed.
 
-A recurring engineering principle runs through this portfolio:
+### A passing build wasn't a release
+Validation passed, but publication still needed its own evidence. The implementation separated source checks, release admission, execution, and readback. The historical record preserved a blocked release despite successful tests.
 
-**No consequential state transition without evidence that it is valid.**
+[**Read the case →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#a-passing-build-was-not-a-release)
 
-</td><td width="44%" valign="top">
+### A green status wasn't the whole answer
+An external status indicator could report a check result without proving that the complete acceptance standard had been met. Verification requirements were defined separately and checked explicitly.
 
-### ENGINEERING SIGNATURE
+[**Read the case →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#when-a-status-indicator-became-the-wrong-source-of-truth)
 
-**01 / Think in systems**  
-Interfaces, dependencies, identity, failure paths.
+### A finished-looking page could still fail
+The reviewed validator examined structure, assets, placeholder actions, and evidence associated with a specific source revision. Visual approval and technical acceptance were treated as different requirements.
 
-**02 / Engineer the boundary**  
-Authenticate, validate, and reject unsafe assumptions.
+[**Read the case →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#a-page-could-look-finished-and-still-fail-acceptance)
 
-**03 / Prove the behavior**  
-Runnable tests, negative cases, explicit limits.
+### A successful request wasn't a confirmed delivery
+Failure-path tests distinguished an accepted request from a completed downstream action. A mocked transport passed a smoke test, but the record did not claim that live delivery had succeeded.
 
-**04 / Design for operations**  
-Readiness, reversibility, traceability, review.
+[**Read the case →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#an-integration-was-functional-in-tests-but-not-proven-end-to-end)
 
-</td></tr>
-</table>
+---
 
-<br/>
+## What you can inspect here
 
-## SOURCE-REVIEWED ENGINEERING / BEYOND DEMONSTRATIONS
+The case studies are drawn from existing engineering source and historical records. The following code is **separately authored public demonstration material**—useful for examining the same kinds of decisions, but not presented as the original project source.
 
-**Four case studies from existing engineering source** — release verification versus production acceptance, provider-independent validation, testable publication standards, and the distinction between publication and transactional readiness. Each case identifies the engineering problem, the observed implementation, its significance, and what remains unverified. Private source and sensitive configuration are not reproduced.
+| Demonstration | What it shows | Code |
+| --- | --- | --- |
+| **Authenticating external events** | Timestamp-bound HMAC validation and deliberate rejection paths | [Implementation](examples/webhook-verification/index.js) · [Tests](examples/webhook-verification/index.test.js) |
+| **Preserving workflow state** | Explicit transitions and duplicate-event handling | [Implementation](examples/workflow-engine/index.js) · [Tests](examples/workflow-engine/index.test.js) |
+| **Requiring release evidence** | Fail-closed readiness decisions | [Implementation](examples/release-gate/index.js) · [Tests](examples/release-gate/index.test.js) |
+| **Binding decisions to evidence** | Hash-chained, authenticated decision records | [Implementation](examples/decision-ledger/index.js) · [Tests](examples/decision-ledger/index.test.js) |
 
-[**EXPLORE THE SOURCE-REVIEWED CASE STUDIES →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md)
-
-### ARCHIVED VERIFICATION / ACTUAL REPORTED RESULTS
-
-An archived October 2026 engineering log records **41 passing identity/API security checks**, **26 passing enterprise release contract tests**, and **5 passing governance-integrity tests**. A separate release-evidence record explicitly reports **BLOCKED** deployment readiness and **NOT REVENUE READY**. These are historical source observations—not newly executed tests or proof of current production health.
-
-[**INSPECT THE SCOPED VERIFICATION RECEIPTS →**](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md)
-
-## SELECTED WORK / THE PROOF IS IN THE DECISION
-
-<table>
-<tr>
-<td width="33%" valign="top">
-
-### 01 · TRUST
-**Secure event intake**
-
-An external event is not trustworthy because it resembles a valid payload.
-
-**Engineering decision:** bind a timestamp and message to an HMAC signature; reject tampering, stale events, and malformed signatures.
-
-[**SOURCE ↗**](examples/webhook-verification/index.js) · [TESTS ↗](examples/webhook-verification/index.test.js)
-
-</td>
-<td width="33%" valign="top">
-
-### 02 · ORCHESTRATION
-**Workflow state integrity**
-
-Real systems receive repeated events and unexpected sequences.
-
-**Engineering decision:** define valid state transitions explicitly and recognize previously processed event IDs.
-
-[**SOURCE ↗**](examples/workflow-engine/index.js) · [TESTS ↗](examples/workflow-engine/index.test.js)
-
-</td>
-<td width="34%" valign="top">
-
-### 03 · RELEASE INTEGRITY
-**Evidence-led admission**
-
-Missing evidence is not the same as successful verification.
-
-**Engineering decision:** require every declared acceptance signal to be explicitly satisfied before reporting readiness.
-
-[**SOURCE ↗**](examples/release-gate/index.js) · [TESTS ↗](examples/release-gate/index.test.js)
-
-</td>
-</tr>
-</table>
-
-### 04 · DECISION PROVENANCE
-
-**Evidence-bound decision history** — a new, independently inspectable demonstration of hash-chained, HMAC-authenticated decision records. The implementation requires an explicit decision and evidence references, then verifies record sequence and detects tampering. It deliberately does not claim durable audit-log or nonrepudiation guarantees.
-
-[**IMPLEMENTATION ↗**](examples/decision-ledger/index.js) &nbsp;·&nbsp; [**NEGATIVE TESTS ↗**](examples/decision-ledger/index.test.js) &nbsp;·&nbsp; [**DESIGN TRADEOFFS ↗**](examples/decision-ledger/README.md)
-
-> **What makes these examples useful:** Each implementation is deliberately small enough to audit. The accompanying [engineering review](docs/ENGINEERING-REVIEW.md) explains the tradeoffs, failure boundaries, and what would need to change for a production system.
-
-<br/>
-
-## CAPABILITIES / FROM REQUIREMENT TO RELIABLE EXECUTION
-
-| Engineering domain | The problems I work on |
-| :--- | :--- |
-| **Systems architecture** | Service interfaces, identity boundaries, dependency mapping, deployment separation, integration design |
-| **Software engineering** | Application and API logic, error handling, maintainable implementations, testable contracts |
-| **Security-minded engineering** | Message authentication, input validation, trust boundaries, deliberate rejection behavior |
-| **Automation & orchestration** | Workflow transitions, event handling, repeatable verification, operational sequencing |
-| **Release & technical governance** | Acceptance gates, change integrity, traceable readiness decisions, reversible execution |
-| **AI engineering & integration** | AI-enabled workflow architecture, evaluation design, human-review and approval boundaries |
-
-<br/>
-
-## ENGINEERING METHOD / PURPOSE FIRST
-
-<div align="center">
-
-### PURPOSE &nbsp; → &nbsp; OUTCOME &nbsp; → &nbsp; ACTION &nbsp; → &nbsp; PROCESS &nbsp; → &nbsp; SUPPORT
-
-**The technical solution should serve the outcome—not become the outcome.**
-
-</div>
-
-I start with the actual requirement, identify constraints and dependencies, define the acceptance conditions, and test failure behavior with the same seriousness as expected behavior.
-
-<br/>
-
-## REVIEW IT YOURSELF
+Run the demonstrations with Node.js 20+:
 
 ```bash
 npm test
 ```
 
-**Node.js 20+** · No third-party packages · No credentials · No external services
+No third-party dependencies or credentials are required. These public tests have not been represented as independent verification of the original engineering work.
 
-| Read | Why it matters |
-| :--- | :--- |
-| [Engineering review](docs/ENGINEERING-REVIEW.md) | Architectural decisions, threat boundaries, and tradeoffs |
-| [Advancement notes](docs/ADVANCEMENT-NOTES.md) | Four specific engineering decisions, linked to source, tests, and limitations |
-| [Source-reviewed case studies](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) | Four observed engineering implementations, their significance, and precise evidence limits |
-| [Historical verification receipts](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md) | Archived test counts, release blockers, and explicitly bounded conclusions |
-| [Evidence matrix](evidence/INDEX.md) | Direct trace from capability to implementation and tests |
-| [Reviewer guide](docs/REVIEWER-GUIDE.md) | A concise path for engineering leaders to inspect the work |
-| [Publication standard](docs/PUBLICATION.md) | Clear boundaries around sensitive information and claims |
+## What I bring to engineering work
 
-<br/>
+**Architecture:** I look at boundaries, dependencies, failure modes, and how one technical decision affects the rest of a system.
+
+**Software:** I turn requirements into interfaces, validation rules, application behavior, and tests that expose incorrect assumptions.
+
+**Security and reliability:** I care about what a system rejects, what it records, and what evidence is needed before advancing a consequential state.
+
+**Integration and automation:** I distinguish attempted actions from confirmed outcomes and design workflows around that distinction.
+
+**Technical judgment:** I don't confuse a polished interface, a green check, or a successful unit test with proof that everything works end to end.
 
 ---
 
 <div align="center">
 
-### JAY PRICE
-**Engineer the system. Substantiate the decision. Own the outcome.**
+**JAY PRICE**
 
-Software engineering · Systems architecture · Technical consulting
+*Make complexity answer to evidence.*
 
-<sub>This public portfolio contains original, synthetic demonstrations—not copied private implementations. They demonstrate engineering methods and do not establish historical production deployments, client results, or independent certifications. Private system architecture, customer information, and credentials are excluded.</sub>
+[Engineering casework](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) · [Historical evidence summary](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md) · [Technical review](docs/ENGINEERING-REVIEW.md)
+
+<sub>Public case narratives are anonymized. Private source, identifying operational details, and business information are intentionally excluded. Historical test results are labeled as historical; live outcomes are not assumed.</sub>
 
 </div>
