@@ -1,21 +1,19 @@
 <div align="center">
 
 <picture>
-  <source media="(max-width: 680px)" srcset="assets/hero-mobile.svg">
-  <img src="assets/hero.svg" alt="Jay Price — Make complexity answer to evidence" width="100%">
+  <source media="(max-width: 680px)" srcset="assets/jay-price-editorial-mobile-2026.svg">
+  <img src="assets/jay-price-editorial-desktop-2026.svg" alt="Jay Price — I don't stop at it works. Original generative geometry and editorial artwork." width="100%">
 </picture>
-
-**Systems Architect · Software Engineer · Technical Consultant**
 
 *I turn complicated requirements into software that can be examined, tested, and trusted.*
 
-[**READ THE REAL ENGINEERING CASES →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) &nbsp;·&nbsp; [**REVIEW THE EVIDENCE →**](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md)
+[Explore the engineering cases](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) &nbsp;·&nbsp; [Inspect the evidence](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md)
 
 </div>
 
 ---
 
-## The work behind the title
+## What the green check doesn't tell you
 
 I care about the questions that appear after someone says, “It works.”
 
