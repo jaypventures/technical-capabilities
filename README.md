@@ -1,8 +1,10 @@
 <div align="center">
 
-![Jay Price — Make complexity answer to evidence](assets/hero.svg)
+<picture>
+  <source media="(max-width: 680px)" srcset="assets/hero-mobile.svg">
+  <img src="assets/hero.svg" alt="Jay Price — Make complexity answer to evidence" width="100%">
+</picture>
 
-### JAY PRICE
 **Systems Architect · Software Engineer · Technical Consultant**
 
 *I turn complicated requirements into software that can be examined, tested, and trusted.*
