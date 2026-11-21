@@ -96,6 +96,12 @@ Missing evidence is not the same as successful verification.
 </tr>
 </table>
 
+### 04 · DECISION PROVENANCE
+
+**Evidence-bound decision history** — a new, independently inspectable demonstration of hash-chained, HMAC-authenticated decision records. The implementation requires an explicit decision and evidence references, then verifies record sequence and detects tampering. It deliberately does not claim durable audit-log or nonrepudiation guarantees.
+
+[**IMPLEMENTATION ↗**](examples/decision-ledger/index.js) &nbsp;·&nbsp; [**NEGATIVE TESTS ↗**](examples/decision-ledger/index.test.js) &nbsp;·&nbsp; [**DESIGN TRADEOFFS ↗**](examples/decision-ledger/README.md)
+
 > **What makes these examples useful:** Each implementation is deliberately small enough to audit. The accompanying [engineering review](docs/ENGINEERING-REVIEW.md) explains the tradeoffs, failure boundaries, and what would need to change for a production system.
 
 <br/>
@@ -138,6 +144,7 @@ npm test
 | Read | Why it matters |
 | :--- | :--- |
 | [Engineering review](docs/ENGINEERING-REVIEW.md) | Architectural decisions, threat boundaries, and tradeoffs |
+| [Advancement notes](docs/ADVANCEMENT-NOTES.md) | Four specific engineering decisions, linked to source, tests, and limitations |
 | [Evidence matrix](evidence/INDEX.md) | Direct trace from capability to implementation and tests |
 | [Reviewer guide](docs/REVIEWER-GUIDE.md) | A concise path for engineering leaders to inspect the work |
 | [Publication standard](docs/PUBLICATION.md) | Clear boundaries around sensitive information and claims |
