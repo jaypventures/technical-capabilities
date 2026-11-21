@@ -1,78 +1,96 @@
 <div align="center">
 
 <picture>
-  <source media="(max-width: 680px)" srcset="assets/jay-price-casework-mobile-v2.svg">
-  <img src="assets/jay-price-casework-desktop-v2.svg" alt="Jay Price — Passing tests is not a verified release. Historical verification showed passing checks while the release remained blocked." width="100%">
+  <source media="(max-width: 680px)" srcset="assets/jay-price-powershell-mobile.svg">
+  <img src="assets/jay-price-powershell-desktop.svg" alt="Jay Price — personal engineering portfolio with a PowerShell revision-integrity code composition." width="100%">
 </picture>
 
-*I turn complicated requirements into software that can be examined, tested, and trusted.*
+*I translate complex requirements into systems, software, and engineering decisions that can be examined and trusted.*
 
-[Explore the engineering cases](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) &nbsp;·&nbsp; [Inspect the evidence](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md)
+[Engineering casework](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) · [Technical implementations](docs/ENGINEERING-REVIEW.md) · [Verification highlights](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md)
 
 </div>
 
 ---
 
-## What the green check doesn't tell you
+## Engineering work that speaks for itself
 
-I care about the questions that appear after someone says, “It works.”
+My focus is the reasoning behind the implementation: the boundaries, validation rules, failure paths, and verification evidence that make technical decisions dependable.
 
-Does a passing build mean the right revision is live? What happens when a downstream service never confirms delivery? Can a visual approval still be trusted after the source changes? Who decides when a release has enough evidence to proceed?
+### Release integrity and revision verification
+**Exact revisions. Explicit acceptance. Verifiable publication.**
 
-Those questions have shaped engineering work I've reviewed and developed. The four cases below describe specific implementation decisions from existing source, with identifying details removed.
+I examined release logic that connected source validation, release admission, publication, and readback to the intended revision. That separation makes release evidence traceable from the code being evaluated to the artifact being served.
 
-### A passing build wasn't a release
-Validation passed, but publication still needed its own evidence. The implementation separated source checks, release admission, execution, and readback. The historical record preserved a blocked release despite successful tests.
+[Explore the case](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#release-integrity-and-revision-verification)
 
-[**Read the case →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#a-passing-build-was-not-a-release)
+### Independent verification across execution environments
+**Defined technical standards instead of ambiguous status indicators.**
 
-### A green status wasn't the whole answer
-An external status indicator could report a check result without proving that the complete acceptance standard had been met. Verification requirements were defined separately and checked explicitly.
+The reviewed source defined executable validation rules and acceptance conditions, including checks for unsupported legacy workflow paths. The result is a clearer contract for evaluating engineering readiness across systems.
 
-[**Read the case →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#when-a-status-indicator-became-the-wrong-source-of-truth)
+[Explore the case](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#independent-verification-across-execution-environments)
 
-### A finished-looking page could still fail
-The reviewed validator examined structure, assets, placeholder actions, and evidence associated with a specific source revision. Visual approval and technical acceptance were treated as different requirements.
+### Revision-bound interface acceptance
+**Visual decisions connected to actual source state.**
 
-[**Read the case →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#a-page-could-look-finished-and-still-fail-acceptance)
+The reviewed interface validator connected structure, asset verification, viewport requirements, and approved visual evidence to particular source revisions. This brings design review and technical validation into the same evidence trail.
 
-### A successful request wasn't a confirmed delivery
-Failure-path tests distinguished an accepted request from a completed downstream action. A mocked transport passed a smoke test, but the record did not claim that live delivery had succeeded.
+[Explore the case](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#revision-bound-interface-acceptance)
 
-[**Read the case →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#an-integration-was-functional-in-tests-but-not-proven-end-to-end)
+### Reliable integration state transitions
+**Accurate state, deliberate transitions, recoverable failure paths.**
+
+The reviewed integration tests covered request validation, downstream response handling, and preservation of intake records. The implementation distinguished receipt from confirmed delivery, protecting data integrity across a multistep workflow.
+
+[Explore the case](evidence/SOURCE-REVIEWED-CASE-STUDIES.md#reliable-integration-state-transitions)
 
 ---
 
-## What you can inspect here
+## Inspect the engineering
 
-The case studies are drawn from existing engineering source and historical records. The following code is **separately authored public demonstration material**—useful for examining the same kinds of decisions, but not presented as the original project source.
+These implementations let you explore the decisions in code, not just read about them.
 
-| Demonstration | What it shows | Code |
+| Focus | Technical implementation | Source and tests |
 | --- | --- | --- |
-| **Authenticating external events** | Timestamp-bound HMAC validation and deliberate rejection paths | [Implementation](examples/webhook-verification/index.js) · [Tests](examples/webhook-verification/index.test.js) |
-| **Preserving workflow state** | Explicit transitions and duplicate-event handling | [Implementation](examples/workflow-engine/index.js) · [Tests](examples/workflow-engine/index.test.js) |
-| **Requiring release evidence** | Fail-closed readiness decisions | [Implementation](examples/release-gate/index.js) · [Tests](examples/release-gate/index.test.js) |
-| **Binding decisions to evidence** | Hash-chained, authenticated decision records | [Implementation](examples/decision-ledger/index.js) · [Tests](examples/decision-ledger/index.test.js) |
+| **Event authentication** | Timestamp-bound HMAC authentication and rejection rules | [Implementation](examples/webhook-verification/index.js) · [Tests](examples/webhook-verification/index.test.js) |
+| **State integrity** | Defined workflow transitions and duplicate-event handling | [Implementation](examples/workflow-engine/index.js) · [Tests](examples/workflow-engine/index.test.js) |
+| **Release admission** | Explicit evidence requirements and readiness checks | [Implementation](examples/release-gate/index.js) · [Tests](examples/release-gate/index.test.js) |
+| **Decision integrity** | Evidence references and hash-linked authenticated records | [Implementation](examples/decision-ledger/index.js) · [Tests](examples/decision-ledger/index.test.js) |
 
-Run the demonstrations with Node.js 20+:
+Run the public examples with Node.js 20+:
 
 ```bash
 npm test
 ```
 
-No third-party dependencies or credentials are required. These public tests have not been represented as independent verification of the original engineering work.
+## Verification highlights
 
-## What I bring to engineering work
+Selected source-reviewed historical records include:
 
-**Architecture:** I look at boundaries, dependencies, failure modes, and how one technical decision affects the rest of a system.
+| Review area | Recorded result |
+| --- | ---: |
+| Authentication and authorization | **41 passed · 0 failed** |
+| Release-contract tests | **26 passed · 0 failed** |
+| Evidence-integrity tests | **5 passed · 0 failed** |
+| Source views examined | **36** |
+| Source links checked | **267** |
+| Asset references checked | **43** |
+| Dependency components scanned | **289** |
 
-**Software:** I turn requirements into interfaces, validation rules, application behavior, and tests that expose incorrect assumptions.
+[Explore the verification records](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md)
 
-**Security and reliability:** I care about what a system rejects, what it records, and what evidence is needed before advancing a consequential state.
+---
 
-**Integration and automation:** I distinguish attempted actions from confirmed outcomes and design workflows around that distinction.
+## The capabilities I bring
 
-**Technical judgment:** I don't confuse a polished interface, a green check, or a successful unit test with proof that everything works end to end.
+**Systems design and software engineering.** Requirements decomposition, interface contracts, state management, validation logic, and implementation review.
+
+**Security-minded development.** Input authentication, integrity checks, rejection paths, and evidence-linked technical decisions.
+
+**Integration and automation.** Cross-system workflows, fault handling, state transitions, repeatable verification, and PowerShell-centered engineering practices.
+
+**Technical governance and reliability.** Traceable revisions, audit-ready decisions, acceptance standards, and practical release discipline.
 
 ---
 
@@ -80,10 +98,10 @@ No third-party dependencies or credentials are required. These public tests have
 
 **JAY PRICE**
 
-*Make complexity answer to evidence.*
+*Technical judgment, made visible.*
 
-[Engineering casework](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) · [Historical evidence summary](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md) · [Technical review](docs/ENGINEERING-REVIEW.md)
+[Casework](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) · [Code](docs/ENGINEERING-REVIEW.md) · [Verification](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md)
 
-<sub>Public case narratives are anonymized. Private source, identifying operational details, and business information are intentionally excluded. Historical test results are labeled as historical; live outcomes are not assumed.</sub>
+<sub>Disclosure: Case studies are anonymized accounts based on reviewed engineering source; public code examples are independent demonstrations, and verification figures reflect archived records.</sub>
 
 </div>

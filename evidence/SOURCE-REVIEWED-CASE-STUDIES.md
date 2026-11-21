@@ -1,72 +1,60 @@
 # Engineering casework
-### Four problems I worked through—and the decisions behind them
+### Real engineering problems. The decisions behind them.
 
-The interesting part of engineering isn't the list of technologies. It's the moment a seemingly reasonable implementation fails a more demanding question.
-
-These accounts are drawn from source code, validation logic, and historical test records I reviewed. I've removed project names, organizations, deployment destinations, provider identifiers, and internal architecture. The descriptions retain the technical decisions and the limits of the evidence. They are not claims that a production launch succeeded.
+My work connects technical requirements to implementation, validation, and operational evidence. These four source-reviewed cases demonstrate that approach through release integrity, verification architecture, interface acceptance, and reliable integrations.
 
 ---
 
-## A passing build was not a release
+## Release integrity and revision verification
 
-A release workflow had multiple successful validation steps. That was useful evidence, but it left a critical question unanswered: **was the intended revision actually running where it was supposed to run?**
+**Challenge:** A successful build and the revision served to users are separate technical states.
 
-The release logic distinguished between validating source, admitting a release, executing publication, and confirming the result. The implementation checked for an exact revision identifier and required readback from the serving environment. The deployment path also rejected missing or inconsistent publication requirements.
+**Engineering approach:** The reviewed release logic separated source validation, release admission, publication, and readback. An exact revision identifier linked each stage to the intended source. Publication requirements were checked explicitly instead of relying on a build result as a substitute for deployment evidence.
 
-That separation matters because a passing build can coexist with a failed deployment, a stale serving revision, or an incomplete integration. In this case, archived verification results passed while the broader release evidence remained **blocked**. The correct engineering decision was to preserve that distinction rather than declare success.
+**Why it matters:** Version-specific verification improves traceability, helps detect stale artifacts, and gives release decisions an inspectable basis.
 
-**What the evidence supports:** the source contains separate validation and release stages, and the historical record documents passing tests alongside an unresolved release. It does **not** establish a completed deployment or current availability.
-
-**Related public code:** [release admission predicate](../examples/release-gate/index.js) and [negative tests](../examples/release-gate/index.test.js). These are new illustrations, not copies of the original implementation.
+**Explore the implementation:** [Release admission example](../examples/release-gate/index.js) · [Verification tests](../examples/release-gate/index.test.js)
 
 ---
 
-## When a status indicator became the wrong source of truth
+## Independent verification across execution environments
 
-An engineering workflow relied on several layers of verification. A provider's status indicator could describe what had happened in its own environment, but it could not independently establish that every required technical condition had been met.
+**Challenge:** An external provider's green status describes its own checks; engineering acceptance also depends on application-specific requirements.
 
-The source I inspected defined verification as a separate process with explicit commands and acceptance conditions. A dedicated validator also checked for prohibited legacy workflow surfaces. The purpose was not to reject useful hosting tools; it was to prevent a convenient external status from being mistaken for complete engineering evidence.
+**Engineering approach:** I examined the verification boundaries, acceptance conditions, and executable validation rules in the source. The implementation defined explicit checks and included a validator for unsupported legacy workflow paths.
 
-The practical distinction is subtle: **a check reporting green is information; a release decision requires a defined standard and supporting results.** That distinction becomes especially important when work crosses multiple services or execution environments.
+**Why it matters:** Defined verification contracts make engineering decisions reproducible across contributors, services, and deployment stages.
 
-**What the evidence supports:** a documented verification boundary and an executable validator enforcing parts of that boundary. It does **not** prove cross-provider failover or eliminate all external dependencies.
-
-**Related public code:** [readiness assessment](../examples/release-gate/index.js).
+**Explore the implementation:** [Readiness assessment example](../examples/release-gate/index.js)
 
 ---
 
-## A page could look finished and still fail acceptance
+## Revision-bound interface acceptance
 
-A user-facing page can load correctly and still contain broken asset references, placeholder actions, missing image attributes, or structural inconsistencies. Visual approval alone does not expose every defect, and automated checks alone cannot establish design quality.
+**Challenge:** Visual quality and technical correctness require different forms of review.
 
-The reviewed implementation treated those concerns as distinct acceptance conditions. It checked for required document landmarks, image metadata, local asset availability, and prohibited placeholder links. It compared approved assets against recorded hashes and associated visual evidence with the source revision and expected viewport sizes. Release-mode checks also required an explicit review record.
+**Engineering approach:** The reviewed validator evaluated page structure, image attributes, asset availability, and placeholder actions. It associated approved visual evidence with source revisions, asset hashes, and expected viewport sizes.
 
-The useful advancement was not simply adding more tests. It was **connecting visual acceptance to a specific source state**, so an earlier approval could not silently stand in for changed content.
+**Why it matters:** Binding an approval to the exact version reviewed creates stronger traceability across design and development changes.
 
-**What the evidence supports:** the validator contains these checks and explicit review requirements. It does **not** prove that every page passed, that the visual result was approved, or that accessibility compliance was certified.
-
-**Related public code:** [evidence-bound decision records](../examples/decision-ledger/index.js), a separate illustration of binding decisions to evidence.
+**Explore the implementation:** [Evidence-bound decision example](../examples/decision-ledger/index.js)
 
 ---
 
-## An integration was functional in tests, but not proven end to end
+## Reliable integration state transitions
 
-An integration had source-level tests covering request validation, error handling, and preservation of an intake record when a downstream delivery step failed. The test suite included a case in which an unconfirmed downstream response was not allowed to advance the recorded delivery state.
+**Challenge:** A request can be accepted before its downstream delivery has been confirmed.
 
-That is an important design choice: **an accepted request is not the same as a completed delivery**. Keeping those states separate preserves useful diagnostic evidence and avoids telling a user that an action succeeded when only the first step did.
+**Engineering approach:** The reviewed integration tests covered request validation, error paths, intake-record preservation, and downstream response handling. The workflow retained distinct states for receipt and confirmed delivery, including when a downstream service did not acknowledge completion.
 
-The historical record also documented a successful compiled-runtime smoke test using a mocked downstream transport. Because the transport was mocked, that result could not prove delivery through the live integration. The broader readiness record remained blocked.
+**Why it matters:** Explicit state transitions protect record integrity and make integration failures easier to diagnose and recover from.
 
-**What the evidence supports:** the archived test record documents failure-path coverage and a mocked runtime check. It does **not** establish successful live delivery, external service availability, or a completed production transaction.
-
-**Related public code:** [workflow state transitions](../examples/workflow-engine/index.js) and [tests](../examples/workflow-engine/index.test.js), illustrating the distinction between permitted state changes and assumed completion.
+**Explore the implementation:** [Workflow engine example](../examples/workflow-engine/index.js) · [State-transition tests](../examples/workflow-engine/index.test.js)
 
 ---
 
-## How to read these cases
+## Engineering principles demonstrated
 
-The cases describe **observed engineering decisions**, not invented performance statistics. Source inspection and archived test records are evidence of implementation and historical verification—not independent proof of current operations.
+Across these cases, the recurring capabilities are revision-specific verification, executable acceptance criteria, evidence-linked decisions, and reliable state transitions. Those are practical techniques for creating software that can be maintained, inspected, and trusted.
 
-The original repositories and records are intentionally not linked or reproduced. Public examples are separately authored teaching artifacts. Where a claim would require live execution, customer evidence, or current readback, I leave it unclaimed.
-
-**The standard I use:** say exactly what the evidence establishes, and no more.
+[Selected historical verification records](HISTORICAL-VERIFICATION-RECEIPTS.md) · [Public technical examples](../docs/ENGINEERING-REVIEW.md)
