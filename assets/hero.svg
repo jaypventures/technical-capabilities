@@ -1,17 +1,35 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="500" viewBox="0 0 1440 500" role="img" aria-label="Jay Price, systems architecture, software engineering, technical governance">
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="540" viewBox="0 0 1440 540" role="img" aria-label="Jay Price engineering portfolio: Make complexity answer to evidence, with a precision-engineered prismatic monogram">
 <defs>
-<linearGradient id="spectrum" x1="0" x2="1" y1="0" y2="0"><stop stop-color="#f1a2d8"/><stop offset=".29" stop-color="#be9cff"/><stop offset=".57" stop-color="#8b9dff"/><stop offset=".79" stop-color="#7bc6f6"/><stop offset="1" stop-color="#8ae8df"/></linearGradient>
-<linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffffff"/><stop offset=".44" stop-color="#cbd1e0"/><stop offset="1" stop-color="#858da5"/></linearGradient>
-<radialGradient id="aura"><stop stop-color="#8859c8" stop-opacity=".23"/><stop offset="1" stop-color="#8859c8" stop-opacity="0"/></radialGradient>
-<pattern id="grid" width="46" height="46" patternUnits="userSpaceOnUse"><path d="M46 0H0V46" fill="none" stroke="#c5c8d6" stroke-opacity=".065"/></pattern>
-<filter id="blur"><feGaussianBlur stdDeviation="24"/></filter>
+<linearGradient id="edge" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff9bcf"/><stop offset=".22" stop-color="#dc9aff"/><stop offset=".48" stop-color="#9ba8ff"/><stop offset=".72" stop-color="#79d8fa"/><stop offset="1" stop-color="#a5f4dc"/></linearGradient>
+<linearGradient id="metal" x1="0" y1="0" x2=".15" y2="1"><stop stop-color="#fff"/><stop offset=".36" stop-color="#dce1ed"/><stop offset=".6" stop-color="#929caf"/><stop offset=".82" stop-color="#f5f7ff"/><stop offset="1" stop-color="#8892a8"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c7d0ff" stop-opacity=".16"/><stop offset=".55" stop-color="#b0a8ff" stop-opacity=".035"/><stop offset="1" stop-color="#8ee8ef" stop-opacity=".13"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#aa7bff" stop-opacity=".2"/><stop offset="1" stop-color="#aa7bff" stop-opacity="0"/></radialGradient>
+<pattern id="mesh" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" stroke="#d6dced" stroke-opacity=".045" fill="none"/></pattern>
+<clipPath id="frame"><rect width="1440" height="540"/></clipPath>
 </defs>
-<rect width="1440" height="500" fill="#090a0f"/><rect width="1440" height="500" fill="url(#grid)"/>
-<circle cx="1170" cy="260" r="360" fill="url(#aura)"/><path d="M0 0H1440" stroke="url(#spectrum)" stroke-width="6"/>
-<text x="92" y="92" font-family="Arial,Helvetica,sans-serif" font-size="18" font-weight="bold" letter-spacing="6" fill="#b8bccc">JAY PRICE  /  ENGINEERING INTELLIGENCE</text>
-<text x="88" y="228" font-family="Arial,Helvetica,sans-serif" font-size="92" font-weight="bold" letter-spacing="-4" fill="url(#chrome)">Make complexity</text>
-<text x="88" y="331" font-family="Arial,Helvetica,sans-serif" font-size="92" font-weight="bold" letter-spacing="-4" fill="url(#chrome)">answer to evidence.</text>
-<rect x="92" y="371" width="128" height="4" fill="url(#spectrum)"/>
-<text x="92" y="424" font-family="Arial,Helvetica,sans-serif" font-size="23" fill="#afb5c6">SYSTEMS  ·  SOFTWARE  ·  SECURITY  ·  ORCHESTRATION</text>
-<g transform="translate(1195 253)" fill="none" stroke-width="2.4"><path d="M0-145 123-73 123 73 0 145-123 73-123-73Z" stroke="url(#spectrum)" opacity=".95"/><path d="M0-108 93-54 93 54 0 108-93 54-93-54Z" stroke="#a6b0ce" opacity=".42"/><path d="M0-145 0 145M-123-73 123 73M123-73-123 73" stroke="url(#spectrum)" opacity=".75"/><circle cx="0" cy="0" r="21" fill="#0a0b12" stroke="#d8ddeb"/><circle cx="0" cy="-145" r="6" fill="#f1a2d8"/><circle cx="123" cy="73" r="6" fill="#8ae8df"/><circle cx="-123" cy="73" r="6" fill="#a79fff"/></g>
+<g clip-path="url(#frame)">
+<rect width="1440" height="540" fill="#08090d"/><rect width="1440" height="540" fill="url(#mesh)"/>
+<circle cx="1160" cy="265" r="365" fill="url(#glow)"/>
+<path d="M0 2H1440" stroke="url(#edge)" stroke-width="4"/>
+<path d="M65 68h36m-36 0v36M1375 68h-36m36 0v36M65 473h36m-36 0v-36M1375 473h-36m36 0v-36" stroke="#9da7bb" stroke-opacity=".4" fill="none" stroke-width="1.5"/>
+<text x="95" y="104" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" letter-spacing="5" fill="#b8c0d1">JAY PRICE</text>
+<rect x="95" y="127" width="52" height="3" fill="url(#edge)"/>
+<text x="95" y="229" font-family="Arial,Helvetica,sans-serif" font-size="78" font-weight="700" letter-spacing="-3" fill="url(#metal)">Make complexity</text>
+<text x="95" y="318" font-family="Arial,Helvetica,sans-serif" font-size="78" font-weight="700" letter-spacing="-3" fill="url(#metal)">answer to evidence.</text>
+<text x="99" y="384" font-family="Arial,Helvetica,sans-serif" font-size="20" letter-spacing="2" fill="#aeb8cc">ARCHITECTURE  /  SOFTWARE  /  SECURITY  /  RELIABILITY</text>
+<path d="M95 418H800" stroke="#8691aa" stroke-opacity=".28"/><path d="M95 418H330" stroke="url(#edge)" stroke-width="2"/>
+<text x="96" y="456" font-family="Arial,Helvetica,sans-serif" font-size="13" letter-spacing="3" fill="#8994aa">ENGINEERING CASEWORK  ·  SOURCE-REVIEWED EVIDENCE</text>
+<g transform="translate(1173 267)">
+<circle r="213" fill="none" stroke="#abb6ce" stroke-opacity=".09"/>
+<circle r="178" fill="none" stroke="#abb6ce" stroke-opacity=".15" stroke-dasharray="2 10"/>
+<path d="M0-176 152-88 152 88 0 176-152 88-152-88Z" fill="url(#glass)" stroke="url(#edge)" stroke-width="2.2"/>
+<path d="M0-145 126-72 126 72 0 145-126 72-126-72Z" fill="none" stroke="#d9e0f2" stroke-opacity=".3"/>
+<path d="M0-176V176M-152-88 152 88M152-88-152 88" stroke="#d7ddf0" stroke-opacity=".16"/>
+<path d="M-104-60 0-120 104-60 104 60 0 120-104 60Z" fill="#090b12" stroke="url(#edge)" stroke-opacity=".8" stroke-width="1.5"/>
+<path d="M-69-51v74q0 27-26 27M-27-54v108M-27-54h45q35 0 35 33T18 12h-45M35-54 75 54 113-54" fill="none" stroke="url(#metal)" stroke-width="10" stroke-linejoin="miter" stroke-linecap="square"/>
+<path d="M-104-60 0-120 104-60" stroke="url(#edge)" stroke-width="3" fill="none"/>
+<g fill="#08090d" stroke="url(#edge)" stroke-width="2"><circle cx="0" cy="-176" r="6"/><circle cx="152" cy="88" r="6"/><circle cx="-152" cy="88" r="6"/></g>
+<path d="M-205 0h35M170 0h35M0-205v20M0 185v20" stroke="#c9d3e9" stroke-opacity=".45"/>
+</g>
+</g>
 </svg>
