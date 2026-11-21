@@ -2,64 +2,78 @@
 
 ![Jay Price — Engineering, made inspectable](assets/hero.svg)
 
-# JAY PRICE
-### SOFTWARE ENGINEERING · SYSTEMS ARCHITECTURE · TECHNICAL INNOVATION
+# Jay Price
+### SYSTEMS ARCHITECTURE · SOFTWARE ENGINEERING · TECHNICAL GOVERNANCE
 
-**Engineering complex systems. Connecting technologies. Making technical decisions inspectable.**
+**I engineer the decisions that make complex systems trustworthy.**
 
-Architecture · Software Engineering · AI Integration · Automation · Security · Reliability
+Architecture · Secure integrations · Workflow orchestration · Release integrity
+
+[**Engineering review**](docs/ENGINEERING-REVIEW.md) &nbsp;·&nbsp; [**Evidence matrix**](evidence/INDEX.md) &nbsp;·&nbsp; [**Reviewer guide**](docs/REVIEWER-GUIDE.md)
 
 </div>
 
 ---
 
-## Engineering highlights
+## The engineering thesis
 
-My work connects operational requirements with hands-on engineering: designing technical architecture, developing software, integrating services, and establishing clear verification criteria.
+**A system should not advance a consequential state without evidence that the transition is valid.**
 
-| Discipline | Engineering focus |
+That principle connects three areas of my work: authenticating external events, preserving workflow integrity, and making release decisions traceable. This repository turns those ideas into compact, reviewable implementations rather than relying on a résumé of untestable claims.
+
+I work across **systems architecture, software engineering, security-minded integration, automation, AI integration design, and technical reliability**. My approach connects operational requirements with technical decisions, acceptance criteria, and failure behavior.
+
+## Selected engineering work
+
+| Focus | Engineering decision | Inspect the evidence |
+| :--- | :--- | :--- |
+| **01 · Establish trust** | Authenticate an incoming event before processing it. Reject tampering, malformed signatures, and stale timestamps. | [Source](examples/webhook-verification/index.js) · [Tests](examples/webhook-verification/index.test.js) · [Threat-boundary analysis](docs/ENGINEERING-REVIEW.md#1-event-trust-boundary) |
+| **02 · Preserve state integrity** | Define permissible workflow transitions and avoid repeating an already-recorded event. | [Source](examples/workflow-engine/index.js) · [Tests](examples/workflow-engine/index.test.js) · [Concurrency tradeoffs](docs/ENGINEERING-REVIEW.md#2-workflow-transition-boundary) |
+| **03 · Require release evidence** | Treat missing acceptance signals as a failed readiness decision, not implicit approval. | [Source](examples/release-gate/index.js) · [Tests](examples/release-gate/index.test.js) · [Provenance considerations](docs/ENGINEERING-REVIEW.md#3-release-acceptance-boundary) |
+
+### Why these decisions matter
+
+**Trust boundaries.** External input is not trusted merely because it looks valid. Authentication must be verified before downstream processing.
+
+**State machines.** Workflow correctness requires explicit transition rules and a deliberate strategy for repeated or competing events.
+
+**Release admission.** Readiness should be based on inspectable evidence tied to defined criteria—not assumptions or undocumented exceptions.
+
+**Operational integrity.** Failure behavior, observability, reversibility, and reviewability belong in the design, not as afterthoughts.
+
+## Technical range
+
+| Discipline | Where I focus |
 | --- | --- |
-| **Systems architecture** | Service boundaries, identity flows, deployment topology, integration contracts |
-| **Software engineering** | Application logic, API interfaces, error handling, maintainable implementation |
-| **Security engineering** | Signed event verification, input validation, authentication boundaries, fail-closed behavior |
-| **Automation** | Event processing, workflow state transitions, repeatable verification |
-| **Release engineering** | Acceptance gates, change integrity, readiness criteria, reversible changes |
-| **AI engineering & integration** | AI-enabled workflows, evaluation, integration, human-review boundaries |
+| **Systems architecture** | Service interfaces, identity boundaries, dependency analysis, environment separation |
+| **Software engineering** | Application logic, API contracts, testing, failure handling, maintainable systems |
+| **Security engineering** | Signature verification, defensive validation, least exposure, fail-closed decisions |
+| **Automation engineering** | Workflow modeling, event handling, repeatable verification |
+| **Release engineering** | Readiness criteria, quality gates, change integrity, audit-friendly decisions |
+| **AI engineering & integration** | Workflow integration, evaluation design, human-review boundaries |
 
-## Featured technical demonstrations
-
-| Area | Technical problem | Inspect |
-| --- | --- | --- |
-| **01 · Trust** | Incoming events can be forged, modified, or stale | [Secure event verification](examples/webhook-verification/index.js) · [Tests](examples/webhook-verification/index.test.js) |
-| **02 · Orchestration** | Workflows can receive repeated or out-of-order events | [Workflow state engine](examples/workflow-engine/index.js) · [Tests](examples/workflow-engine/index.test.js) |
-| **03 · Release integrity** | A release can appear ready without sufficient evidence | [Release readiness gate](examples/release-gate/index.js) · [Tests](examples/release-gate/index.test.js) |
-
-## Technical approach
-
-**Purpose → Outcome → Action → Process → Support**
-
-I begin with the intended outcome, define system boundaries and requirements, implement against explicit acceptance criteria, and verify both expected behavior and failure cases.
-
-The objective is software that can be **reviewed, tested, maintained, and operated with confidence**.
-
-## Evidence and verification
-
-Every featured example connects a technical problem to implementation and tests. Run the standalone demonstrations with Node.js 20+:
+## Inspect the work
 
 ```bash
 npm test
 ```
 
-**[Explore the evidence matrix →](evidence/INDEX.md)**
+**Runtime:** Node.js 20+ · **Third-party packages:** none · **External credentials:** none.
 
-This is a curated public showcase. Demonstration implementations illustrate engineering methods; they are not claims of production deployment, client outcomes, certifications, or disclosure of private system architecture.
+[Read the architecture and tradeoffs →](docs/ENGINEERING-REVIEW.md)  
+[Trace every demonstrated claim to evidence →](evidence/INDEX.md)  
+[Use the five-minute technical review →](docs/REVIEWER-GUIDE.md)
 
-## Professional focus
+## My operating method
 
-**Jay Price** — Software Engineer · Systems Architect · Technology Consultant
+**Purpose → Outcome → Action → Process → Support**
 
-Technology and business consulting · Software engineering · Systems integration · AI engineering · Automation · Technical governance and reliability
+I start with the intended outcome, translate it into technical requirements, define system boundaries, implement against explicit acceptance criteria, and test failure behavior as deliberately as the happy path.
+
+**The standard is not code that merely runs. It is engineering that can withstand inspection.**
 
 ---
 
-<sub>Original synthetic demonstrations. No credentials, customer data, personal records, or private system configurations.</sub>
+**Jay Price** · Software Engineer · Systems Architect · Technology Consultant
+
+<sub>Publication integrity: The code in this repository is original, synthetic demonstration material. It illustrates engineering decisions; it is not presented as proof of historical deployments, client outcomes, production hardening, or external certification. Private architectures, business configurations, credentials, and customer information are excluded.</sub>
