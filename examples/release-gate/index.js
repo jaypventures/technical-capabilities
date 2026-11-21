@@ -1,0 +1,1 @@
+export function assessRelease(evidence,required=['tests','security','review']){if(!evidence||typeof evidence!=='object')return {ready:false,missing:[...required]};const missing=required.filter(key=>evidence[key]!==true);return {ready:missing.length===0,missing};}
