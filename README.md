@@ -59,6 +59,12 @@ Readiness, reversibility, traceability, review.
 
 [**EXPLORE THE SOURCE-REVIEWED CASE STUDIES →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md)
 
+### ARCHIVED VERIFICATION / ACTUAL REPORTED RESULTS
+
+An archived October 2026 engineering log records **41 passing identity/API security checks**, **26 passing enterprise release contract tests**, and **5 passing governance-integrity tests**. A separate release-evidence record explicitly reports **BLOCKED** deployment readiness and **NOT REVENUE READY**. These are historical source observations—not newly executed tests or proof of current production health.
+
+[**INSPECT THE SCOPED VERIFICATION RECEIPTS →**](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md)
+
 ## SELECTED WORK / THE PROOF IS IN THE DECISION
 
 <table>
@@ -152,6 +158,7 @@ npm test
 | [Engineering review](docs/ENGINEERING-REVIEW.md) | Architectural decisions, threat boundaries, and tradeoffs |
 | [Advancement notes](docs/ADVANCEMENT-NOTES.md) | Four specific engineering decisions, linked to source, tests, and limitations |
 | [Source-reviewed case studies](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) | Four observed engineering implementations, their significance, and precise evidence limits |
+| [Historical verification receipts](evidence/HISTORICAL-VERIFICATION-RECEIPTS.md) | Archived test counts, release blockers, and explicitly bounded conclusions |
 | [Evidence matrix](evidence/INDEX.md) | Direct trace from capability to implementation and tests |
 | [Reviewer guide](docs/REVIEWER-GUIDE.md) | A concise path for engineering leaders to inspect the work |
 | [Publication standard](docs/PUBLICATION.md) | Clear boundaries around sensitive information and claims |
