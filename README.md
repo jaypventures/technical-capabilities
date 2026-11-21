@@ -1,79 +1,158 @@
 <div align="center">
 
-![Jay Price — Engineering, made inspectable](assets/hero.svg)
+![Jay Price — Make complexity answer to evidence](assets/hero.svg)
 
-# Jay Price
-### SYSTEMS ARCHITECTURE · SOFTWARE ENGINEERING · TECHNICAL GOVERNANCE
+<br/>
 
-**I engineer the decisions that make complex systems trustworthy.**
+### JAY PRICE
+**Systems Architect · Software Engineer · Technical Consultant**
 
-Architecture · Secure integrations · Workflow orchestration · Release integrity
+*I connect operational reality with technical execution—then make the decisions inspectable.*
 
-[**Engineering review**](docs/ENGINEERING-REVIEW.md) &nbsp;·&nbsp; [**Evidence matrix**](evidence/INDEX.md) &nbsp;·&nbsp; [**Reviewer guide**](docs/REVIEWER-GUIDE.md)
+[**START WITH THE ENGINEERING REVIEW →**](docs/ENGINEERING-REVIEW.md) &nbsp;&nbsp; [**TRACE THE EVIDENCE →**](evidence/INDEX.md) &nbsp;&nbsp; [**FIVE-MINUTE REVIEW →**](docs/REVIEWER-GUIDE.md)
+
+<br/>
+
+`SYSTEMS ARCHITECTURE` &nbsp; `SOFTWARE ENGINEERING` &nbsp; `SECURE INTEGRATIONS` &nbsp; `AUTOMATION` &nbsp; `RELEASE INTEGRITY`
 
 </div>
 
 ---
 
-## The engineering thesis
+<table>
+<tr><td width="56%" valign="top">
 
-**A system should not advance a consequential state without evidence that the transition is valid.**
+### THE POINT OF VIEW
 
-That principle connects three areas of my work: authenticating external events, preserving workflow integrity, and making release decisions traceable. This repository turns those ideas into compact, reviewable implementations rather than relying on a résumé of untestable claims.
+## I don't just ask whether a system works.<br/>I ask what makes it trustworthy.
 
-I work across **systems architecture, software engineering, security-minded integration, automation, AI integration design, and technical reliability**. My approach connects operational requirements with technical decisions, acceptance criteria, and failure behavior.
+My work sits at the intersection of **architecture, implementation, and operational integrity**. I translate complicated requirements into explicit system boundaries, testable decisions, and software that can be examined beyond the happy path.
 
-## Selected engineering work
+A recurring engineering principle runs through this portfolio:
 
-| Focus | Engineering decision | Inspect the evidence |
-| :--- | :--- | :--- |
-| **01 · Establish trust** | Authenticate an incoming event before processing it. Reject tampering, malformed signatures, and stale timestamps. | [Source](examples/webhook-verification/index.js) · [Tests](examples/webhook-verification/index.test.js) · [Threat-boundary analysis](docs/ENGINEERING-REVIEW.md#1-event-trust-boundary) |
-| **02 · Preserve state integrity** | Define permissible workflow transitions and avoid repeating an already-recorded event. | [Source](examples/workflow-engine/index.js) · [Tests](examples/workflow-engine/index.test.js) · [Concurrency tradeoffs](docs/ENGINEERING-REVIEW.md#2-workflow-transition-boundary) |
-| **03 · Require release evidence** | Treat missing acceptance signals as a failed readiness decision, not implicit approval. | [Source](examples/release-gate/index.js) · [Tests](examples/release-gate/index.test.js) · [Provenance considerations](docs/ENGINEERING-REVIEW.md#3-release-acceptance-boundary) |
+**No consequential state transition without evidence that it is valid.**
 
-### Why these decisions matter
+</td><td width="44%" valign="top">
 
-**Trust boundaries.** External input is not trusted merely because it looks valid. Authentication must be verified before downstream processing.
+### ENGINEERING SIGNATURE
 
-**State machines.** Workflow correctness requires explicit transition rules and a deliberate strategy for repeated or competing events.
+**01 / Think in systems**  
+Interfaces, dependencies, identity, failure paths.
 
-**Release admission.** Readiness should be based on inspectable evidence tied to defined criteria—not assumptions or undocumented exceptions.
+**02 / Engineer the boundary**  
+Authenticate, validate, and reject unsafe assumptions.
 
-**Operational integrity.** Failure behavior, observability, reversibility, and reviewability belong in the design, not as afterthoughts.
+**03 / Prove the behavior**  
+Runnable tests, negative cases, explicit limits.
 
-## Technical range
+**04 / Design for operations**  
+Readiness, reversibility, traceability, review.
 
-| Discipline | Where I focus |
-| --- | --- |
-| **Systems architecture** | Service interfaces, identity boundaries, dependency analysis, environment separation |
-| **Software engineering** | Application logic, API contracts, testing, failure handling, maintainable systems |
-| **Security engineering** | Signature verification, defensive validation, least exposure, fail-closed decisions |
-| **Automation engineering** | Workflow modeling, event handling, repeatable verification |
-| **Release engineering** | Readiness criteria, quality gates, change integrity, audit-friendly decisions |
-| **AI engineering & integration** | Workflow integration, evaluation design, human-review boundaries |
+</td></tr>
+</table>
 
-## Inspect the work
+<br/>
+
+## SELECTED WORK / THE PROOF IS IN THE DECISION
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### 01 · TRUST
+**Secure event intake**
+
+An external event is not trustworthy because it resembles a valid payload.
+
+**Engineering decision:** bind a timestamp and message to an HMAC signature; reject tampering, stale events, and malformed signatures.
+
+[**SOURCE ↗**](examples/webhook-verification/index.js) · [TESTS ↗](examples/webhook-verification/index.test.js)
+
+</td>
+<td width="33%" valign="top">
+
+### 02 · ORCHESTRATION
+**Workflow state integrity**
+
+Real systems receive repeated events and unexpected sequences.
+
+**Engineering decision:** define valid state transitions explicitly and recognize previously processed event IDs.
+
+[**SOURCE ↗**](examples/workflow-engine/index.js) · [TESTS ↗](examples/workflow-engine/index.test.js)
+
+</td>
+<td width="34%" valign="top">
+
+### 03 · RELEASE INTEGRITY
+**Evidence-led admission**
+
+Missing evidence is not the same as successful verification.
+
+**Engineering decision:** require every declared acceptance signal to be explicitly satisfied before reporting readiness.
+
+[**SOURCE ↗**](examples/release-gate/index.js) · [TESTS ↗](examples/release-gate/index.test.js)
+
+</td>
+</tr>
+</table>
+
+> **What makes these examples useful:** Each implementation is deliberately small enough to audit. The accompanying [engineering review](docs/ENGINEERING-REVIEW.md) explains the tradeoffs, failure boundaries, and what would need to change for a production system.
+
+<br/>
+
+## CAPABILITIES / FROM REQUIREMENT TO RELIABLE EXECUTION
+
+| Engineering domain | The problems I work on |
+| :--- | :--- |
+| **Systems architecture** | Service interfaces, identity boundaries, dependency mapping, deployment separation, integration design |
+| **Software engineering** | Application and API logic, error handling, maintainable implementations, testable contracts |
+| **Security-minded engineering** | Message authentication, input validation, trust boundaries, deliberate rejection behavior |
+| **Automation & orchestration** | Workflow transitions, event handling, repeatable verification, operational sequencing |
+| **Release & technical governance** | Acceptance gates, change integrity, traceable readiness decisions, reversible execution |
+| **AI engineering & integration** | AI-enabled workflow architecture, evaluation design, human-review and approval boundaries |
+
+<br/>
+
+## ENGINEERING METHOD / PURPOSE FIRST
+
+<div align="center">
+
+### PURPOSE &nbsp; → &nbsp; OUTCOME &nbsp; → &nbsp; ACTION &nbsp; → &nbsp; PROCESS &nbsp; → &nbsp; SUPPORT
+
+**The technical solution should serve the outcome—not become the outcome.**
+
+</div>
+
+I start with the actual requirement, identify constraints and dependencies, define the acceptance conditions, and test failure behavior with the same seriousness as expected behavior.
+
+<br/>
+
+## REVIEW IT YOURSELF
 
 ```bash
 npm test
 ```
 
-**Runtime:** Node.js 20+ · **Third-party packages:** none · **External credentials:** none.
+**Node.js 20+** · No third-party packages · No credentials · No external services
 
-[Read the architecture and tradeoffs →](docs/ENGINEERING-REVIEW.md)  
-[Trace every demonstrated claim to evidence →](evidence/INDEX.md)  
-[Use the five-minute technical review →](docs/REVIEWER-GUIDE.md)
+| Read | Why it matters |
+| :--- | :--- |
+| [Engineering review](docs/ENGINEERING-REVIEW.md) | Architectural decisions, threat boundaries, and tradeoffs |
+| [Evidence matrix](evidence/INDEX.md) | Direct trace from capability to implementation and tests |
+| [Reviewer guide](docs/REVIEWER-GUIDE.md) | A concise path for engineering leaders to inspect the work |
+| [Publication standard](docs/PUBLICATION.md) | Clear boundaries around sensitive information and claims |
 
-## My operating method
-
-**Purpose → Outcome → Action → Process → Support**
-
-I start with the intended outcome, translate it into technical requirements, define system boundaries, implement against explicit acceptance criteria, and test failure behavior as deliberately as the happy path.
-
-**The standard is not code that merely runs. It is engineering that can withstand inspection.**
+<br/>
 
 ---
 
-**Jay Price** · Software Engineer · Systems Architect · Technology Consultant
+<div align="center">
 
-<sub>Publication integrity: The code in this repository is original, synthetic demonstration material. It illustrates engineering decisions; it is not presented as proof of historical deployments, client outcomes, production hardening, or external certification. Private architectures, business configurations, credentials, and customer information are excluded.</sub>
+### JAY PRICE
+**Engineer the system. Substantiate the decision. Own the outcome.**
+
+Software engineering · Systems architecture · Technical consulting
+
+<sub>This public portfolio contains original, synthetic demonstrations—not copied private implementations. They demonstrate engineering methods and do not establish historical production deployments, client results, or independent certifications. Private system architecture, customer information, and credentials are excluded.</sub>
+
+</div>
