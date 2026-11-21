@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(max-width: 680px)" srcset="assets/jay-price-editorial-mobile-2026.svg">
-  <img src="assets/jay-price-editorial-desktop-2026.svg" alt="Jay Price — I don't stop at it works. Original generative geometry and editorial artwork." width="100%">
+  <source media="(max-width: 680px)" srcset="assets/jay-price-casework-mobile-v2.svg">
+  <img src="assets/jay-price-casework-desktop-v2.svg" alt="Jay Price — Passing tests is not a verified release. Historical verification showed passing checks while the release remained blocked." width="100%">
 </picture>
 
 *I turn complicated requirements into software that can be examined, tested, and trusted.*
