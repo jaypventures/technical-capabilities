@@ -53,6 +53,12 @@ Readiness, reversibility, traceability, review.
 
 <br/>
 
+## SOURCE-REVIEWED ENGINEERING / BEYOND DEMONSTRATIONS
+
+**Four case studies from existing engineering source** — release verification versus production acceptance, provider-independent validation, testable publication standards, and the distinction between publication and transactional readiness. Each case identifies the engineering problem, the observed implementation, its significance, and what remains unverified. Private source and sensitive configuration are not reproduced.
+
+[**EXPLORE THE SOURCE-REVIEWED CASE STUDIES →**](evidence/SOURCE-REVIEWED-CASE-STUDIES.md)
+
 ## SELECTED WORK / THE PROOF IS IN THE DECISION
 
 <table>
@@ -145,6 +151,7 @@ npm test
 | :--- | :--- |
 | [Engineering review](docs/ENGINEERING-REVIEW.md) | Architectural decisions, threat boundaries, and tradeoffs |
 | [Advancement notes](docs/ADVANCEMENT-NOTES.md) | Four specific engineering decisions, linked to source, tests, and limitations |
+| [Source-reviewed case studies](evidence/SOURCE-REVIEWED-CASE-STUDIES.md) | Four observed engineering implementations, their significance, and precise evidence limits |
 | [Evidence matrix](evidence/INDEX.md) | Direct trace from capability to implementation and tests |
 | [Reviewer guide](docs/REVIEWER-GUIDE.md) | A concise path for engineering leaders to inspect the work |
 | [Publication standard](docs/PUBLICATION.md) | Clear boundaries around sensitive information and claims |
