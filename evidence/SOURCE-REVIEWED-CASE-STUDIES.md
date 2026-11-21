@@ -1,83 +1,72 @@
-# Selected engineering work · Source-reviewed case studies
+# Engineering casework
+### Four problems I worked through—and the decisions behind them
 
-**Jay Price | Systems architecture, software engineering, technical governance**
+The interesting part of engineering isn't the list of technologies. It's the moment a seemingly reasonable implementation fails a more demanding question.
 
-These are **reviews of existing engineering artifacts**, not newly invented project stories. The source material was inspected in an accessible engineering repository on **21 November 2026**. The underlying repository may be private or contain sensitive implementation details, so this public document does not copy its source, publish internal identifiers, or imply permission to disclose its topology.
-
-## 01 — Separating source verification from production acceptance
-
-**Engineering problem.** A successful lint run, test suite, merge, or staging operation does not establish that the intended software is serving in production.
-
-**Observed implementation.** A documented release workflow separates repository-native validation from the production operator. Its release guide defines a completion condition requiring the intended revision identifier and successful live route readback. A separate release script records the status of individual validation steps and blocks progress on failure.
-
-**Why it matters.** This distinguishes *code correctness*, *release eligibility*, *deployment execution*, and *observed production state*—four states that are often incorrectly collapsed into one.
-
-**Source evidence inspected.** Deployment guide; native verification pipeline guide; production release operator; deployment operator.
-
-**Public demonstration.** [Release evidence gate](../examples/release-gate/index.js) · [tests](../examples/release-gate/index.test.js).
-
-**What is verified.** The documented separation and corresponding implementation logic exist in the reviewed source.
-
-**What is not verified.** A completed production release, current live availability, a measured reduction in incidents, or a particular customer outcome.
+These accounts are drawn from source code, validation logic, and historical test records I reviewed. I've removed project names, organizations, deployment destinations, provider identifiers, and internal architecture. The descriptions retain the technical decisions and the limits of the evidence. They are not claims that a production launch succeeded.
 
 ---
 
-## 02 — Provider-independent engineering verification
+## A passing build was not a release
 
-**Engineering problem.** Source-hosting status indicators can be mistaken for independent evidence that a change is safe or operationally complete.
+A release workflow had multiple successful validation steps. That was useful evidence, but it left a critical question unanswered: **was the intended revision actually running where it was supposed to run?**
 
-**Observed implementation.** The inspected pipeline documents repository-native verification commands, exact-revision checks, and a distinction between provider check status and independent acceptance. A dedicated boundary validator rejects retired workflow surfaces and requires an explicit authority contract.
+The release logic distinguished between validating source, admitting a release, executing publication, and confirming the result. The implementation checked for an exact revision identifier and required readback from the serving environment. The deployment path also rejected missing or inconsistent publication requirements.
 
-**Why it matters.** It reduces ambiguity about which system produces evidence and which system merely displays status. The design makes verification requirements inspectable outside a particular provider's workflow UI.
+That separation matters because a passing build can coexist with a failed deployment, a stale serving revision, or an incomplete integration. In this case, archived verification results passed while the broader release evidence remained **blocked**. The correct engineering decision was to preserve that distinction rather than declare success.
 
-**Source evidence inspected.** Native verification pipeline guide; provider-boundary validator.
+**What the evidence supports:** the source contains separate validation and release stages, and the historical record documents passing tests alongside an unresolved release. It does **not** establish a completed deployment or current availability.
 
-**Public demonstration.** [Evidence-led release decision](../examples/release-gate/index.js) · [tests](../examples/release-gate/index.test.js).
-
-**What is verified.** The reviewed documentation and validator encode these architectural boundaries.
-
-**What is not verified.** Independent operational resilience across providers, production failover, or the absence of all external dependencies.
+**Related public code:** [release admission predicate](../examples/release-gate/index.js) and [negative tests](../examples/release-gate/index.test.js). These are new illustrations, not copies of the original implementation.
 
 ---
 
-## 03 — Visual and publication acceptance as testable engineering requirements
+## When a status indicator became the wrong source of truth
 
-**Engineering problem.** A page can render while still violating accessibility conventions, approved content boundaries, or release requirements.
+An engineering workflow relied on several layers of verification. A provider's status indicator could describe what had happened in its own environment, but it could not independently establish that every required technical condition had been met.
 
-**Observed implementation.** A design-standards validator inspects retained routes for document structure, required shell markers, image attributes, missing local assets, and placeholder actions. It also checks hashes of approved assets and associates visual evidence with source content and required viewport widths. A separate design-governance validator requires explicit review evidence for release mode.
+The source I inspected defined verification as a separate process with explicit commands and acceptance conditions. A dedicated validator also checked for prohibited legacy workflow surfaces. The purpose was not to reject useful hosting tools; it was to prevent a convenient external status from being mistaken for complete engineering evidence.
 
-**Why it matters.** It treats user-facing quality and publication eligibility as requirements that can be checked rather than subjective assertions made after deployment.
+The practical distinction is subtle: **a check reporting green is information; a release decision requires a defined standard and supporting results.** That distinction becomes especially important when work crosses multiple services or execution environments.
 
-**Source evidence inspected.** Design-standards validator; design-governance validator.
+**What the evidence supports:** a documented verification boundary and an executable validator enforcing parts of that boundary. It does **not** prove cross-provider failover or eliminate all external dependencies.
 
-**Public demonstration.** [Evidence-bound decision history](../examples/decision-ledger/index.js) · [tests](../examples/decision-ledger/index.test.js). This is a conceptual demonstration, **not a reproduction** of the private validator.
-
-**What is verified.** The reviewed scripts contain these validation checks and release-review requirements.
-
-**What is not verified.** That every route passes, that visual quality has been approved, that accessibility compliance has been certified, or that publication succeeded.
+**Related public code:** [readiness assessment](../examples/release-gate/index.js).
 
 ---
 
-## 04 — Explicit readiness boundaries for commercial functionality
+## A page could look finished and still fail acceptance
 
-**Engineering problem.** Publication readiness and transactional readiness are different conditions; treating them as interchangeable can mislead operators and users.
+A user-facing page can load correctly and still contain broken asset references, placeholder actions, missing image attributes, or structural inconsistencies. Visual approval alone does not expose every defect, and automated checks alone cannot establish design quality.
 
-**Observed implementation.** The inspected deployment operator checks publication-readiness state separately from commercial-readiness state. When commercial readiness is not fully verified, it emits a warning rather than claiming that checkout and fulfillment are certified.
+The reviewed implementation treated those concerns as distinct acceptance conditions. It checked for required document landmarks, image metadata, local asset availability, and prohibited placeholder links. It compared approved assets against recorded hashes and associated visual evidence with the source revision and expected viewport sizes. Release-mode checks also required an explicit review record.
 
-**Why it matters.** It makes a consequential distinction visible in the release process: **a published interface does not prove an end-to-end commercial transaction works**.
+The useful advancement was not simply adding more tests. It was **connecting visual acceptance to a specific source state**, so an earlier approval could not silently stand in for changed content.
 
-**Source evidence inspected.** Production deployment operator and publication readiness checks.
+**What the evidence supports:** the validator contains these checks and explicit review requirements. It does **not** prove that every page passed, that the visual result was approved, or that accessibility compliance was certified.
 
-**What is verified.** The distinction is encoded in the reviewed implementation.
-
-**What is not verified.** Working payment processing, fulfillment, transaction volume, or revenue.
+**Related public code:** [evidence-bound decision records](../examples/decision-ledger/index.js), a separate illustration of binding decisions to evidence.
 
 ---
 
-## Review method and claim boundaries
+## An integration was functional in tests, but not proven end to end
 
-The findings above are based on direct inspection of source text, not on execution of the underlying private project or an independent audit. The public examples in this repository are original, sanitized demonstrations that illustrate related engineering techniques. They are **not** extracted copies of the reviewed source and do not prove the historical implementation's operational outcomes.
+An integration had source-level tests covering request validation, error handling, and preservation of an intake record when a downstream delivery step failed. The test suite included a case in which an unconfirmed downstream response was not allowed to advance the recorded delivery state.
 
-**Evidence promotion rule:** publish measurable results only with an approved, reproducible receipt and an explicit scope. Never substitute a code snippet, an attractive diagram, or a source filename for a verified operational result.
+That is an important design choice: **an accepted request is not the same as a completed delivery**. Keeping those states separate preserves useful diagnostic evidence and avoids telling a user that an action succeeded when only the first step did.
 
-**A useful engineering question is not just “what was built?” It is “what decision did the implementation enforce, what failure did it prevent, and how can a reviewer verify the claim?”**
+The historical record also documented a successful compiled-runtime smoke test using a mocked downstream transport. Because the transport was mocked, that result could not prove delivery through the live integration. The broader readiness record remained blocked.
+
+**What the evidence supports:** the archived test record documents failure-path coverage and a mocked runtime check. It does **not** establish successful live delivery, external service availability, or a completed production transaction.
+
+**Related public code:** [workflow state transitions](../examples/workflow-engine/index.js) and [tests](../examples/workflow-engine/index.test.js), illustrating the distinction between permitted state changes and assumed completion.
+
+---
+
+## How to read these cases
+
+The cases describe **observed engineering decisions**, not invented performance statistics. Source inspection and archived test records are evidence of implementation and historical verification—not independent proof of current operations.
+
+The original repositories and records are intentionally not linked or reproduced. Public examples are separately authored teaching artifacts. Where a claim would require live execution, customer evidence, or current readback, I leave it unclaimed.
+
+**The standard I use:** say exactly what the evidence establishes, and no more.
