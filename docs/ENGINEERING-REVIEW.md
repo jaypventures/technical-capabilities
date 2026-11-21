@@ -1,54 +1,32 @@
-# Engineering review · Trust, orchestration, and release integrity
+# Technical review | Four inspectable implementations
 
-## Executive brief
+The [engineering casework](../evidence/SOURCE-REVIEWED-CASE-STUDIES.md) describes specific situations observed in existing source and historical verification records. The four implementations below are **separately authored public examples**. They make the underlying technical decisions easy to examine without reproducing the original code.
 
-Three small demonstrations explore a single architectural principle: **a system should not advance a consequential state without evidence that the transition is valid**.
+| Decision | What the example does | What it does not prove |
+| --- | --- | --- |
+| Authenticate an incoming event | Checks timestamp-bound HMAC authentication and rejects malformed or stale input | Durable replay prevention or a live integration |
+| Preserve workflow state | Permits defined transitions and recognizes repeated event IDs | Atomic updates across multiple processes |
+| Require release evidence | Rejects missing or failing readiness conditions | Trusted attestations or successful deployment |
+| Bind decisions to evidence | Chains and authenticates decision records | Durable audit storage, independent timestamps, or nonrepudiation |
 
-| Boundary | Decision | Failure behavior | Proof surface |
-| --- | --- | --- | --- |
-| External event intake | Authenticate a timestamp-bound message | Reject stale, malformed, or modified input | [Webhook implementation](../examples/webhook-verification/index.js) and [tests](../examples/webhook-verification/index.test.js) |
-| Stateful workflow | Admit only permitted transitions; ignore known event IDs | Reject invalid transitions; avoid duplicate processing in a single record | [Workflow implementation](../examples/workflow-engine/index.js) and [tests](../examples/workflow-engine/index.test.js) |
-| Release readiness | Require every declared acceptance signal to be explicitly true | Return a non-ready decision with missing evidence | [Release implementation](../examples/release-gate/index.js) and [tests](../examples/release-gate/index.test.js) |
+## Event authentication
 
-## 1. Event trust boundary
+The [implementation](../examples/webhook-verification/index.js) binds a timestamp to message content using HMAC-SHA256. Its [tests](../examples/webhook-verification/index.test.js) examine valid and rejected inputs. A freshness window does not prevent replay inside that window. A real integration would also need durable event tracking, key rotation, transport protections, and a defined signing protocol.
 
-**Problem.** A webhook endpoint receives data from outside its trust boundary. Accepting the payload because it has a familiar JSON shape is insufficient.
+## Workflow state
 
-**Approach.** The demonstration binds a timestamp and payload into an HMAC-SHA256 digest, compares fixed-length digests with a timing-safe primitive, and rejects messages outside a configured age window.
+The [implementation](../examples/workflow-engine/index.js) uses explicit transition rules and event identifiers. Its [tests](../examples/workflow-engine/index.test.js) examine permitted and rejected changes. In-memory state is useful for explaining the rule, not for proving concurrency safety or persistence.
 
-**Tradeoff.** A time window limits acceptance of stale messages but does **not** prevent replay inside that window. Production integrations need provider-specific signature formats, replay persistence or unique event IDs, secret rotation, transport security, and request-size limits.
+## Release admission
 
-**Review questions.** What happens when the body is modified? Is the original raw request body used? How is replay prevention distributed across instances?
+The [implementation](../examples/release-gate/index.js) requires each readiness condition to be explicitly satisfied. Its [tests](../examples/release-gate/index.test.js) exercise missing and failed conditions. A boolean readiness check is not proof that evidence is authentic, bound to the correct revision, or sufficient for publication.
 
-## 2. Workflow transition boundary
+## Evidence-bound decisions
 
-**Problem.** A workflow can receive events in unexpected order, including repeated delivery.
+The [implementation](../examples/decision-ledger/index.js) requires evidence references and explicit decisions, then links and authenticates records. Its [tests](../examples/decision-ledger/index.test.js) cover tampering, missing evidence, and incorrect keys. See the [design notes](../examples/decision-ledger/README.md) for limitations. A symmetric authentication key does not establish independent authorship, and an in-memory chain is not a durable audit service.
 
-**Approach.** A transition table enumerates valid edges. A record carries previously processed IDs so a repeated event can return without changing state.
+## The distinction that matters
 
-**Tradeoff.** In-memory duplicate tracking demonstrates semantics but is not a transactional guarantee. A production system needs a durable uniqueness constraint, atomic state update, concurrency strategy, and retention policy.
+The [case studies](../evidence/SOURCE-REVIEWED-CASE-STUDIES.md) describe observed engineering work. The [historical verification summary](../evidence/HISTORICAL-VERIFICATION-RECEIPTS.md) reports results from archived records. The public examples demonstrate related techniques. **None of those evidence types should be substituted for another.**
 
-**Review questions.** Can two workers process the same event simultaneously? How are conflicting transitions serialized? What happens after process restart?
-
-## 3. Release acceptance boundary
-
-**Problem.** A release can be approved based on missing or ambiguous signals.
-
-**Approach.** The gate evaluates a declared evidence set and requires an explicit `true` value for each required condition. It reports missing or failing signals.
-
-**Tradeoff.** A boolean gate is a policy demonstration, not a provenance system. Production release admission would bind attestations to exact artifact hashes, trusted issuers, environment, expiry, and approvals.
-
-**Review questions.** Is evidence bound to the artifact being shipped? Can the evidence be forged? Can the release be reversed?
-
-## Cross-cutting engineering judgment
-
-- **Fail closed at trust boundaries:** absent evidence is not evidence of success.
-- **Model invalid paths deliberately:** negative tests document what the system must reject.
-- **Separate policy from mechanism:** examples are intentionally minimal so decision logic is inspectable.
-- **Make limitations visible:** demonstration code is not a production security claim.
-
-## What this portfolio establishes
-
-The repository contains original code and tests that can be inspected and executed locally. It demonstrates engineering reasoning about trust boundaries, state machines, and release gates. It does **not** establish prior customer impact, a deployed service, external validation, or performance at scale.
-
-For independent review, run `npm test` with Node.js 20+.
+Run `npm test` with Node.js 20+ to inspect the public examples. Their execution does not independently validate the historical work.
