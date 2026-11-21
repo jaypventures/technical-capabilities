@@ -1,0 +1,3 @@
+const allowed={draft:['review'],review:['approved','rejected'],approved:['published'],rejected:['draft'],published:[]};
+export function transition(state,next){if(!Object.hasOwn(allowed,state))throw Error('Unknown state');if(!allowed[state].includes(next))throw Error('Invalid transition');return next;}
+export function applyEvent(record,event){if(!record||!Array.isArray(record.processed)||typeof event?.id!=='string'||!event.id)throw Error('Invalid event');if(record.processed.includes(event.id))return record;return {state:transition(record.state,event.next),processed:[...record.processed,event.id]};}
