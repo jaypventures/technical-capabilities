@@ -1,5 +1,7 @@
 <div align="center">
 
+![Jay Price — Engineering, made inspectable](assets/hero.svg)
+
 # JAY PRICE
 ### SOFTWARE ENGINEERING · SYSTEMS ARCHITECTURE · TECHNICAL INNOVATION
 
