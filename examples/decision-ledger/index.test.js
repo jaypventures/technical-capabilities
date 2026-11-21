@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {appendDecision,verifyHistory} from './index.js';
+const key='synthetic-demo-secret-123';
+const input={actor:'reviewer',action:'release',evidence:['test-receipt:123','security-review:456'],approved:true};
+test('records a signed decision with evidence references',()=>{const h=appendDecision([],input,key);assert.equal(h[0].sequence,1);assert.equal(verifyHistory(h,key),true)});
+test('chains decisions in sequence',()=>{const a=appendDecision([],input,key);const b=appendDecision(a,{...input,action:'publish'},key);assert.equal(b[1].previousHash,b[0].hash);assert.equal(verifyHistory(b,key),true)});
+test('detects modified evidence',()=>{const h=appendDecision([],input,key);h[0].evidence=['altered'];assert.equal(verifyHistory(h,key),false)});
+test('detects removed entries',()=>{const a=appendDecision([],input,key);const b=appendDecision(a,{...input,action:'publish'},key);assert.equal(verifyHistory(b.slice(1),key),false)});
+test('rejects empty evidence',()=>assert.throws(()=>appendDecision([],{...input,evidence:[]},key),/Evidence/));
+test('rejects implicit approval',()=>assert.throws(()=>appendDecision([],{...input,approved:undefined},key),/Explicit/));
+test('rejects invalid signing secret',()=>assert.throws(()=>appendDecision([],input,'short'),/secret/));
+test('rejects altered history before append',()=>{const h=appendDecision([],input,key);h[0].actor='impostor';assert.throws(()=>appendDecision(h,input,key),/integrity/)});
+test('rejects wrong verification key',()=>{const h=appendDecision([],input,key);assert.equal(verifyHistory(h,'another-synthetic-secret'),false)});
