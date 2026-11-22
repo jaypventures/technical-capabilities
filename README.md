@@ -82,6 +82,14 @@ Selected source-reviewed historical records include:
 
 ---
 
+## Current research: AI Agent Execution Integrity
+
+**Can an AI agent prove that its actions stayed within the authority it was given?**
+
+I'm developing an independent evaluation method for agent authorization, scope fidelity, observable side effects, and completion claims. The first release includes an executable reference evaluator with reproducible, deliberately synthetic tests—rather than unsupported claims about commercial systems.
+
+[Explore the research, methodology, and tested reference code](research/agent-execution-integrity/README.md)
+
 ## The capabilities I bring
 
 **Systems design and software engineering.** Requirements decomposition, interface contracts, state management, validation logic, and implementation review.
